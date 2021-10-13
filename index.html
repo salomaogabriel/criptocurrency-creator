@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    
+    <title>Criptocurrerncy Creator</title>
+    <link rel="shortcut icon" href="assets/logo.svg" type="image/x-icon">
+
+</head>
+<body>
+    <canvas class="background"></canvas>
+    <section id="menu">
+        <h1>Create your own Criptocurrerncy</h1>
+        <article>
+            <button onclick="goToCreateCoin()">Create New Coin</button>
+            <button>Import from File</button>
+        </article>
+        <h2>Or</h2>
+        <div id="dropZone">
+            <p>Drop a file with the blockchain</p>
+        </div>
+        <article class="theme">
+            <h2>Toggle Theme</h2>
+            <label class="switch" >
+                <input type="checkbox" onclick="changeTheme()" class="switches">
+                <span class="slider"></span>
+            </label>
+        </article>
+        <h2>Made by Gabriel Salomão</h2>
+    </section>
+    <section id="create" class="hide">
+        <form>
+            <h1>Create Coin</h1>
+            <h2>Coin Name</h2>
+            <input type="text" placeholder="The name of my coin is...">
+            <h2>Coin Abbreviation</h2>
+            <input type="text" placeholder="The coin abbreviation is (eg. BTC)..." maxlength="3">
+            <h2>Coin Difficulty</h2>
+            <input type="number" placeholder="The difficulty is..." min="0">
+            <p>The difficulty is how long it takes to mine a single block.<br>
+            Recommended: 4. Any number bigger than 4 will take a while.</p>
+            <h2>Mining Reward</h2>
+            <input type="number" placeholder="The mining Reward is ..." min="0">
+            <p>How much coins does the miner gets when they mine a block</p>
+            <h1>Your Keys</h1>
+            <button type="button" onclick="animateGenerateKeys(this)">
+                <p>Create Key</p>
+                <div class="waves hide">
+                    <div class="wave" style="--w:0s;"></div>
+                    <div class="wave" style="--w:0.4s;"></div>
+                    <div class="wave" style="--w:0.8s;"></div>
+                    <div class="wave" style="--w:1.2s;"></div>
+                    <div class="wave" style="--w:1.6s;"></div>
+                </div>
+            </button>
+            <article class="keys hide">
+                <div class="key">
+                    <h3>Private Key:</h3>
+                    <h4></h4>
+                </div>
+                <div class="key">
+                    <h3>Public Key:</h3>
+                    <h4></h4>
+                </div>
+                <p>Save these keys for future use  </p>
+                <button type="button" onclick="downloadKeys('keys.txt','Public Key=reallyLongString \nPrivate Key=Johndoe')">Download Keys</button>
+            </article>
+            <h3>Or</h3>
+            <h2>Use existing key</h2>
+            <input type="text" placeholder="Private Key">
+            <button >Create Coin</button>
+
+        </form>
+
+        <article class="theme">
+            <h2>Toggle Theme</h2>
+            <label class="switch" >
+                <input type="checkbox" onclick="changeTheme()" class="switches">
+                <span class="slider"></span>
+            </label>
+        </article>
+        <h2>Made by Gabriel Salomão</h2>
+    </section>
+
+
+
+    <!-- Particles scripts -->
+    <script src="src/require.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
+    <script src="src/main.js"></script>
+    <script src="src/animations.js"></script>
+</body>
+</html>

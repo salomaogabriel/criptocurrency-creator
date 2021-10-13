@@ -69,6 +69,9 @@ class Blockchain {
         this.pendingTransactions = [];
         this.miningReward = 100
     }
+    importBlockchain(chain) {
+        this.chain = chain;
+    }
 
     createGenesisBlock() {
         return new Block("01/01/2021","Genesis Block","0");

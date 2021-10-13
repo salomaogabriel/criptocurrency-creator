@@ -1,0 +1,240 @@
+:root {
+    --background: #f0f0f0;
+    --color: black;
+    --keys-background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar {
+    width: 10px;
+    z-index: 1;
+}
+  
+  /* Track */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 12px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+* {
+    font-family: 'Nunito', sans-serif;
+}
+body {
+    margin:0;
+    overflow-y: hidden !important;
+
+}
+button {
+    background-color: coral;
+    color: white;
+    font-size: 24px;
+    border:0;
+    padding:12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 500ms;
+    margin:10px;
+    backdrop-filter: blur(4px);
+    z-index: inherit;
+
+}
+button:hover {
+    background-color: rgb(255, 68, 0);
+}
+#menu,#create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background);
+    height: 100vh;
+    z-index: 1;
+    transition:500ms;
+    overflow-y: auto;
+
+}
+h1 {
+    font-size: 2em;
+}
+h1,h2,h3,h4,p {
+    color:var(--color);
+    transition:500ms;
+    z-index: 1;
+
+}
+button p {
+    color:white;
+    margin:0;
+}
+#dropZone {
+    background-color: rgba(255, 127, 80, 0.2);
+    border:2px dashed coral;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 80px;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+}
+#dropZone p {
+    color: coral;
+
+}
+.background {
+    position: absolute;
+    display: block;
+    top:0;
+    left:0;
+    z-index:0;
+}
+.theme {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: inherit;
+    backdrop-filter: blur(2px);
+}
+.switch {
+    position: relative;
+    margin: auto;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--background);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;  
+}
+  
+input:checked + .slider {
+    background-color: coral;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px coral;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+.hide {
+    display: none !important;
+}
+.scaleUp {
+    animation: scale 5s;
+}
+@keyframes scale {
+    0% {
+        transform: scale(1,1);
+    }
+    100% {
+        transform: scale(2,2);
+    }
+}
+#create form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:20px;
+    width: 40%;
+    padding: 12px;
+    backdrop-filter: blur(3px);
+    border:1px solid var(--color);
+    border-radius: 12px;
+
+}
+#create input {
+    border:0;
+    font-size: 24px;
+    padding:12px;
+    background-color: transparent;
+    border-left:2px solid var(--color);
+    color: var(--color);
+    width: 60%;
+}
+::placeholder {
+    color: var(--color);
+}
+.waves {
+    display: flex;
+    width: 60px;
+    align-items: center;
+    align-content: center;
+    margin:  0 auto;
+    height:40px;
+    padding:2px;
+}
+.wave {
+    background-color: white;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 3px;
+    padding-right: 3px;
+    width: 0;
+    margin:3px;
+    animation: wave 2s infinite;
+    animation-delay: var(--w);
+
+}
+@keyframes wave {
+    0% {padding-top:6px; padding-bottom:6px;}
+    50% {padding-top:12px; padding-bottom:12px;}
+    100% {padding-top:6px; padding-bottom:6px;}
+}
+.keys{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.key {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    
+}
+.key h4 {
+    background-color: var(--keys-background);
+    padding:8px;
+    border-radius: 12px;
+    margin-left:10px;
+    white-space: nowrap; 
+    width: 75%; 
+    overflow: auto;
+}

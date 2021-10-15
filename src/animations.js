@@ -1,3 +1,31 @@
+// Charts
+
+var ctx = document.getElementById('balance').getContext('2d');
+var chart = new Chart(ctx, {
+    type:"line",
+    data: {
+      labels: ['March', 'April', 'May', 'June', 'July', 'August'],
+      datasets: [{
+        label:"GTC",
+        data: [20,90,80,70,40,55],
+        backgroundColor: 'rgba(255, 127, 80, 0.2)',
+        borderColor: 'rgba(255, 127, 80, 1)',
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+        }
+    }
+    }
+});
+
+
 // Particles from the menu
 var particles = Particles.init({
 	selector: '.background',
@@ -32,12 +60,16 @@ function changeTheme() {
     }
 }
 
+var privateKey, publicKey;
 function animateGenerateKeys(button) {
     button.firstElementChild.classList.add("hide");
     button.lastElementChild.classList.remove("hide");
     document.getElementsByClassName("keys")[0].classList.remove("hide");
-    var privateKey, publicKey;
     [privateKey,publicKey] = generateKeys();
+
+    document.getElementById("pvKey").innerHTML = privateKey;
+    document.getElementById("puKey").innerHTML = publicKey;
+
 
 }
 
@@ -51,8 +83,9 @@ function goToCreateCoin() {
         document.getElementById("create").classList.remove("hide");
     }, 2000);
 }
-function downloadKeys(filename, text) {
+function downloadKeys(filename) {
     var element = document.createElement('a');
+    var text = 'Public Key = '+ publicKey + '\nPrivate Key = ' + privateKey;
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
   
@@ -62,5 +95,9 @@ function downloadKeys(filename, text) {
     element.click();
   
     document.body.removeChild(element);
-  }
+}
+function animateCreateCoin() {
+    document.getElementById("create").classList.add("hide");
+    document.getElementById("main").classList.remove("hide");
+}
   

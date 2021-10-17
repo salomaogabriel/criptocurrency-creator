@@ -12,11 +12,16 @@ transaction1.signTransaction(myKey);
 // console.log(transaction1.isValid())
 coin.addTransaction(transaction1);
 
+const transaction2 = new Transaction(myWalletAddress,'public key of the receiver goes here',20);
+transaction2.signTransaction(myKey);
+coin.addTransaction(transaction2);
+
+
 
 // // console.log('\n Starting the miner');
 coin.minePendingTransactions(myWalletAddress);
 // console.log("My Balance is ",coin.getBalanceOfAddress(myWalletAddress));
-console.log('Blockchain valid?', coin.isChainValid() ? 'Yes' : 'No');
+// console.log(coin)
 function generateKeys() {
     const key = ec.genKeyPair();
     const publicKey = key.getPublic("hex");

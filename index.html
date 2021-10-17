@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     
     <title>Criptocurrerncy Creator</title>
     <link rel="shortcut icon" href="assets/logo.svg" type="image/x-icon">
@@ -15,7 +16,7 @@
 </head>
 <body>
     <canvas class="background"></canvas>
-    <section id="menu">
+    <section id="menu" class="hide">
         <h1>Create your own Criptocurrerncy</h1>
         <article>
             <button onclick="goToCreateCoin()">Create New Coin</button>
@@ -46,8 +47,11 @@
             <p>The difficulty is how long it takes to mine a single block.<br>
             Recommended: 4. Any number bigger than 4 will take a while.</p>
             <h2>Mining Reward</h2>
-            <input type="number" placeholder="The mining Reward is ..." min="0">
-            <p>How much coins does the miner gets when they mine a block</p>
+            <input type="number" placeholder="The mining Reward is..." min="0">
+            <p>How many coins does the miner gets when they mine a block</p>
+            <h2>Starting Amount</h2>
+            <input type="number" placeholder="I'll start with..." min="0">
+            <p>How many coins do you want to start with</p>
             <h1>Your Keys</h1>
             <button type="button" onclick="animateGenerateKeys(this)">
                 <p>Create Key</p>
@@ -62,19 +66,19 @@
             <article class="keys hide">
                 <div class="key">
                     <h3>Private Key:</h3>
-                    <h4></h4>
+                    <h4 id="pvKey"></h4>
                 </div>
                 <div class="key">
                     <h3>Public Key:</h3>
-                    <h4></h4>
+                    <h4 id="puKey"></h4>
                 </div>
                 <p>Save these keys for future use  </p>
-                <button type="button" onclick="downloadKeys('keys.txt','Public Key=reallyLongString \nPrivate Key=Johndoe')">Download Keys</button>
+                <button type="button" onclick="downloadKeys('keys.txt')">Download Keys</button>
             </article>
             <h3>Or</h3>
             <h2>Use existing key</h2>
             <input type="text" placeholder="Private Key">
-            <button >Create Coin</button>
+            <button type="button" onclick="animateCreateCoin()">Create Coin</button>
 
         </form>
 
@@ -87,12 +91,159 @@
         </article>
         <h2>Made by Gabriel Salomão</h2>
     </section>
+    <section id="main">
+        <header>
+            <h1>Gitcoin(GTC)</h1>
+
+            <nav>
+                <label class="switch" >
+                    <input type="checkbox" onclick="changeTheme()" class="switches">
+                    <span class="slider"></span>
+                </label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 12c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm2 0c0-5.514 4.486-10 10-10v20c-5.514 0-10-4.486-10-10z" fill=currentColor stroke= currentColor/></svg>
+                <a role="button" tabindex="0" class="nav active" onclick="changePage('wallet',this)">My Wallet</a>
+                <a role="button" tabindex="0" class="nav" onclick="changePage('coin',this)">Coin</a>
+                <a role="button" tabindex="0" class="nav" onclick="changePage('miner',this)">Miner</a>
+                <a role="button" tabindex="0" class="nav" onclick="changePage('settings',this)">Settings</a>
+
+            </nav>
+        </header>
+        <div id="wallet" class="page" >
+            <div class="walletInfo">
+                <article>
+                    <h2>Balance</h2>
+                    <h3>1000 <span>GTC</span></h3>
+                </article>
+                <article>
+                    <h2>Keys</h2>
+                    <div class="walletKeys">
+                        <h3>Public &nbsp;Key: <span>keyaaaaaaaaaaaaaaaaaaaaaaa</span></h3>
+                        <h3>Private Key: <span>keyaaaaaaaaaaaaaaa</span></h3>
+                        <p>Do not share your private Key!</p>
+                    </div>
+                </article>
+                <article>
+                    <h2>Warning</h2>
+                    <h4>This website is still under development! <br> Do not use it as a real coin.</h4>
+                </article>
+                <article>
+                    <h2>Last Transaction:</h2>
+                    <div class="transaction">
+                        <h3>From:<span>keyaaaaaaaaaaaaaaa</span></h3>
+                        <h3>To:<span>keyaaaaaaaaaaaaaaa</span></h3>
+                        <h3>Amount:<span>10GTC</span></h3>
+                    </div>
+                </article>
+            </div>
+            <div class="balance-graphic">
+                <h2>Balance in the Last 6 months</h2>
+                <article>
+                    <canvas id="balance" width="500px" height="300px"></canvas>
+                </article>
+            </div>
+            <button type="button">Create a Transaction</button>
+            <article id="transactionForm">
+                <form>
+                    <h1>New Transaction</h1>
+                    <h2>Receiver Address</h2>
+                    <input type="text" placeholder="To">
+                    <h2>Amount to send</h2>
+                    <input type="number" placeholder="Amount" min="0">
+                    <button type="button">Sign and Create Transaction</button>
+                </form>
+            </article>
+        </div>
+        <div id="coin" class="page hide">
+            <h1>Blocks on chain</h1>
+            <h3>Each card represents a block on the chain. Click on a block to see the transactions stored inside.</h3>
+            
+            <div class="cards">
+                <div class="card">
+                    <h2>Block 1</h2>
+                    <h3>Hash:</h3>
+                    <h4>00dejdiefjweklwfwe</h4>
+                    <h3>Hash of previous block</h3>
+                    <h4>00krkewproweprkaaaaaaaaaaaaaaawerowepkrwerowekrpewk</h4>
+                    <h3>Nonce:</h3>
+                    <h4>0</h4>
+                    <h3>Timestamp:</h3>
+                    <h4>1256765456567843</h4>
+                </div>
+                <div class="card">
+                    <h2>Block 1</h2>
+                    <h3>Hash:</h3>
+                    <h4>00dejdiefjweklwfwe</h4>
+                    <h3>Hash of previous block</h3>
+                    <h4>00krkewproweprkwerowepkrwerowekrpewk</h4>
+                    <h3>Nonce:</h3>
+                    <h4>0</h4>
+                    <h3>Timestamp:</h3>
+                    <h4>1256765456567843</h4>
+                </div>
+                
+            </div>
+            <div class="transactions">
+                <h1>Transactions inside Block 1</h1>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Amount</th>
+                        <th>Timestamp</th>
+                        <th>Valid</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>121323</td>
+                        <td>10</td>
+                        <td>12932193214</td>
+                        <td>Y</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="miner" class="page hide">
+            <h1>Miner</h1>
+            <button>Start mining blocks</button>
+            <h2>Mining reward address</h2>
+            <input type="text" name="" placeholder="Mining reward address...">
+            <h2>Miner Console</h2>
+            <div id="console">
+                <p>Starting Miner...</p>
+            </div>
+
+        </div>
+        <div id="settings" class="page hide">
+            <article>
+                <h1>Key Settings</h1>
+                <h2>Public Key:<span>bautaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaic</span></h2>
+                <h2>Private Key:<span>bomtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaic</span></h2>
+                <div class="buttons">
+                    <button>Generate new Keys</button>
+                    <h3>Or</h3>
+                    <button>Add existing keys</button>
+                </div>
+            </article>
+            <article>
+                <h1>Coin Settings</h1>
+                <button>Create or Import new Coin</button>
+                <h2>Coin Name:<span>Gitcoin</span></h2>
+                <h2>Coin Abbreviation:<span>GTC</span></h2>
+                <h2>Coin Difficulty:<span>2</span></h2>
+                <h2>Coin Reward:<span>100</span></h2>
+                <button>Export this Coin</button>
+            </article>
+        </div>
+        
+        
+    </section>
 
 
 
-    <!-- Particles scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
-    <script src="src/animations.js"></script>
     <script src="src/main.bundle.js"></script>
+    <script src="src/animations.js"></script>
 </body>
 </html>

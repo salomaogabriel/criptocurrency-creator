@@ -100,4 +100,19 @@ function animateCreateCoin() {
     document.getElementById("create").classList.add("hide");
     document.getElementById("main").classList.remove("hide");
 }
-  
+function changePage(newPageId,navlink) {
+ let pages = document.getElementsByClassName("page");
+ let navs = document.getElementsByClassName("nav");
+
+  let newPage = document.getElementById(newPageId);
+
+ for(let i = 0; i < pages.length;i++) {
+    pages[i].classList.add("hide")
+ }
+ for(let i = 0; i < navs.length;i++) {
+  navs[i].classList.remove("active");
+}
+ document.getElementById(newPageId).classList.remove("hide");
+  navlink.classList.add("active")
+
+}

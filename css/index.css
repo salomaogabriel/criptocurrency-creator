@@ -43,12 +43,14 @@ button {
     margin:10px;
     backdrop-filter: blur(4px);
     z-index: inherit;
+    width: fit-content;
+    margin: auto;
 
 }
 button:hover {
     background-color: rgb(255, 68, 0);
 }
-#menu,#create {
+#menu,#create,#main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,10 +61,25 @@ button:hover {
     overflow-y: auto;
 
 }
+#wallet,#coin,#miner,#settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 2;
+}
+#coin {
+    margin-left:4%
+}
+#balance {
+    max-width: 400px !important;
+}
+#main {
+    align-items: initial;
+}
 h1 {
     font-size: 2em;
 }
-h1,h2,h3,h4,p {
+h1,h2,h3,h4,p,table {
     color:var(--color);
     transition:500ms;
     z-index: 1;
@@ -167,7 +184,7 @@ input:checked + .slider:before {
         transform: scale(2,2);
     }
 }
-#create form {
+#create form, #transactionForm form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,7 +196,15 @@ input:checked + .slider:before {
     border-radius: 12px;
 
 }
-#create input {
+#transactionForm {
+    margin: auto;
+    width: 50%;
+    margin-bottom:20px;
+}
+#transactionForm form {
+    width: 100%;
+}
+#create input, #transactionForm input,#miner input {
     border:0;
     font-size: 24px;
     padding:12px;
@@ -187,6 +212,10 @@ input:checked + .slider:before {
     border-left:2px solid var(--color);
     color: var(--color);
     width: 60%;
+}
+#miner input {
+    width: 20%;
+    margin: auto;
 }
 ::placeholder {
     color: var(--color);
@@ -237,4 +266,223 @@ input:checked + .slider:before {
     white-space: nowrap; 
     width: 75%; 
     overflow: auto;
+}
+header {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    justify-content: space-between;
+    padding:0px 50px;
+    border-bottom: 1px solid var(--keys-background);
+}
+header a {
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color);
+    transition: 500ms;
+}
+header h1 {
+    margin:6px;
+    font-weight: 200;
+}
+nav a{
+    padding:10px;
+    border-bottom:2px solid transparent;
+}
+nav a:first-of-type {
+    margin-left: 20px;
+}
+nav a:hover {
+    border-bottom-color:coral;
+    color: coral;
+}
+.active {
+    border-bottom-color:coral;
+
+}
+.walletInfo {
+    display: grid;
+    grid-template-columns: 20% 30% 20% 27%;
+    gap: 1%;
+    width: 95%;
+    margin: 0px auto;
+    flex:1;
+    margin-bottom: 1%;
+    margin-top:10px;
+}
+.walletInfo article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 12px;
+    border:1px solid var(--keys-background);
+}
+#wallet button {
+    width: fit-content;
+    margin: 20px auto;
+}
+.balance-graphic {
+    width: 93%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 12px;
+    border:1px solid var(--keys-background);
+}
+nav label{
+    transform: scale(.8);
+    /* margin-right: 25px !important; */
+}
+nav{
+    display: flex;
+    align-items: center;
+}
+svg {
+    transition: 500ms;
+    color: var(--color); 
+}
+.walletInfo article:nth-child(1) h3 {
+    font-size: 64px;
+    margin:10px;
+}
+.walletInfo article:nth-of-type(1) span {
+    font-size: 24px;
+}
+.walletKeys{ 
+    width: 100%;
+    padding:10px;
+}
+.walletKeys p {
+    margin: auto;
+    width: fit-content;
+}
+.transaction {
+    border: 2px solid var(--keys-background);
+    border-radius: 12px;
+}
+.walletKeys h3,.transaction h3 {
+    margin:20px;
+    width: 85%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+}
+.walletInfo article:nth-of-type(2) span,.transaction span {
+    margin-left: 10px;
+    background-color: var(--keys-background);
+    padding:8px;
+    transition: 500ms;
+    border-radius: 12px;
+    font-weight: 200;
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+}
+.cards {
+    display: flex;
+    
+}
+.card {
+    backdrop-filter: blur(4px);
+    border:2px solid var(--keys-background);
+    border-radius: 12px;
+    margin:10px;
+    display:flex;
+    flex-direction: column;
+    width: 20vw;
+
+
+}
+.card h2 {
+border-bottom: 2px solid var(--keys-background);
+padding-bottom: 10px;
+margin-bottom:0;
+}
+.card h3{
+    margin:10px;
+   
+}
+.card h4 {
+    margin:0;
+    font-weight: 200;
+    padding:10px;
+    box-sizing: 100%;
+    border-bottom: 2px solid var(--keys-background);
+    white-space: nowrap !important;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+
+
+}
+#miner {
+    align-items: center;
+}
+#console {
+    background-color: var(--keys-background);
+    width: 95%;
+    height: 40vh;
+    overflow-y: auto;
+    border:1px solid var(--color);
+    border-radius: 12px;
+    backdrop-filter: blur(2px);
+
+}
+#console p {
+    font-size: 20px;
+    margin:10px;
+    margin-left:40px;
+}
+#settings article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    width: 40%;
+    margin: auto;
+    border:2px solid var(--keys-background);
+    border-bottom-color: transparent;
+    border-radius: 12px 12px 0px 0px;
+    margin-top:20px;
+}
+#settings article:last-of-type {
+    border-top-color: transparent;
+    border-bottom-color: var(--keys-background);
+    margin-bottom:20px;
+    margin-top:0px;
+    border-radius: 0px 0px 12px 12px;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+.buttons h3 {
+    margin:0px 40px;
+}
+#settings span {
+    font-weight: 200;
+    padding:5px;
+    margin-left:5px;
+    background-color: var(--keys-background);
+    border-radius: 12px;
+
+}
+#settings h2 {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+}
+#settings span {
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+}
+#settings article:last-of-type button:last-of-type {
+    margin-bottom:20px;
 }

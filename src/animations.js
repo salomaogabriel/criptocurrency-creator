@@ -70,7 +70,11 @@ function animateGenerateKeys(button) {
     document.getElementById("pvKey").innerHTML = privateKey;
     document.getElementById("puKey").innerHTML = publicKey;
 
-
+    setTimeout(() => {
+      button.firstElementChild.classList.remove("hide");
+    button.lastElementChild.classList.add("hide");
+    }, 2000);
+    
 }
 
 function goToCreateCoin() {

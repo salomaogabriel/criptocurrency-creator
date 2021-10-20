@@ -63,24 +63,28 @@ class Block {
 }
 
 class Blockchain {
-    constructor() {
+    constructor(name,abbr,difficulty,reward,start,minerAccount) {
+        this.minerAccount = minerAccount;
         this.chain = [this.createGenesisBlock()];
-        this.difficulty = 2;
+        this.difficulty = difficulty;
         this.pendingTransactions = [];
-        this.miningReward = 100
+        this.miningReward = reward;
+        this.name = name;
+        this.abbr = abbr;
+        this.difficulty = difficulty;
     }
     importBlockchain(chain) {
         this.chain = chain;
     }
 
     createGenesisBlock() {
-        return new Block("01/01/2021","Genesis Block","0");
+        return new Block(Date.now(),'Genesis Block','');
     }
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
     }
-    minePendingTransactions(miningRewardAddress) {
-        const rewardTransaction = new Transaction(null,miningRewardAddress,this.miningReward);
+    minePendingTransactions() {
+        const rewardTransaction = new Transaction(null,this.minerAccount,this.miningReward);
         this.pendingTransactions.push(rewardTransaction);
         let block = new Block(Date.now(),this.pendingTransactions,this.getLatestBlock().hash);
         block.mineBlock(this.difficulty);
@@ -99,9 +103,9 @@ class Blockchain {
         if(transaction.amount <= 0 ) {
             throw new Error("Transaction amount should be bigger than 0");
         }
-        // if (this.getBalanceOfAddress(transaction.fromAddress) < transaction.amount) {
-        //     throw new Error('Not enough balance');
-        // }
+        if (this.getBalanceOfAddress(transaction.fromAddress) < transaction.amount) {
+            throw new Error('Not enough balance');
+        }
         this.pendingTransactions.push(transaction);
     }
     getBalanceOfAddress(address) {

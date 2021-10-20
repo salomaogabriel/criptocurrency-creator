@@ -68,7 +68,10 @@ button:hover {
     z-index: 2;
 }
 #coin {
-    margin-left:4%
+    display: unset;
+    height: 100vh !important;
+    margin-left:4%;
+
 }
 #balance {
     max-width: 400px !important;
@@ -301,6 +304,7 @@ nav a:hover {
     border-bottom-color:coral;
 
 }
+
 .walletInfo {
     display: grid;
     grid-template-columns: 20% 30% 20% 27%;
@@ -363,6 +367,7 @@ svg {
     width: fit-content;
 }
 .transaction {
+    width: 100%;
     border: 2px solid var(--keys-background);
     border-radius: 12px;
 }
@@ -386,7 +391,10 @@ svg {
 }
 .cards {
     display: flex;
-    
+    width: 100%;
+    z-index: 2;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .card {
     backdrop-filter: blur(4px);
@@ -396,8 +404,9 @@ svg {
     display:flex;
     flex-direction: column;
     width: 20vw;
-
-
+    z-index: inherit;
+    transition: 200ms;
+    cursor: pointer;
 }
 .card h2 {
 border-bottom: 2px solid var(--keys-background);
@@ -426,7 +435,7 @@ margin-bottom:0;
 #console {
     background-color: var(--keys-background);
     width: 95%;
-    height: 40vh;
+    height: 55vh;
     overflow-y: auto;
     border:1px solid var(--color);
     border-radius: 12px;
@@ -485,4 +494,30 @@ margin-bottom:0;
 }
 #settings article:last-of-type button:last-of-type {
     margin-bottom:20px;
+}
+.activeBlock {
+    border-color: coral ;
+}
+table {
+    margin-bottom: 20px;
+    font-size: 24px;
+    width: 95%;
+    border-spacing: 4px;
+    border-left: 4px solid var(--color);
+}
+th,td{
+text-align: start;
+backdrop-filter: blur(8px);
+padding:8px;
+border-radius: 12px;
+
+}
+td {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+.eventr {
+    background-color: var(--keys-background);
 }

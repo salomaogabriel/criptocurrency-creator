@@ -15,37 +15,71 @@
         color: white;
         font-family: 'Nunito', sans-serif;
     }
+    #dropZone {
+    background-color: rgba(255, 127, 80, 0.2);
+    border:2px dashed coral;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 80px;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+}
+#dropZone p {
+    color: coral;
+
+}
 </style>
 <body>
+    <input type="file" name="file" id="fileUpload" onchange="importFile(this.files)" >
+    <div id="dropZone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                        
+        <p>Drag a file </p>
+    </div>
     <script>
-        let coin = '';
-        fetch('coin.json').then(res => res.json()).then(res => importCoin(res));
+        function importFile(files) {
+            
+        let fileContent = "";
+            const fr = new FileReader();
+            fr.onload = () => {
+            fileContent = JSON.parse(fr.result);
+            importCoin(fileContent);
+            }
+            fr.readAsText(files[0]);
+   }
+   function importFileFromDrop(file) {
+            
+            let fileContent = "";
+                const fr = new FileReader();
+                fr.onloadend = () => {
+                fileContent = JSON.parse(fr.result);
+                importCoin(fileContent);
+                }
+                fr.readAsText(file)
+
+       }
         
+   function dropHandler(ev) {
 
-        // function importCoin(res) {
-        //     //criar o blockChain//
-        //     let importedCoin = '';
-        //     //Criar os Blocos
-        //     let blocks = '';
-        //     for(let i = 0; i < res.chain.length; i++) {
-        //         if(i == 0 ) {
-        //             // Criar um bloco genesis com valor predefinido
-        //         }
-        //         else {
-        //             //criar um bloco com valores predefinidos   
-        //                 // console.log(res.chain[i])
+  // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+  ev.preventDefault();
 
-        //             //criar as transações do bloco
-        //             for(let b = 0; b < res.chain[i].transactions.length; b++) {
-        //                 //criar transação
+  if (ev.dataTransfer.items) {
+    // Use a interface DataTransferItemList para acessar o (s) arquivo (s)
+    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+      // Se os itens soltos não forem arquivos, rejeite-os
+      if (ev.dataTransfer.items[i].kind === 'file') {
+        var file = ev.dataTransfer.items[i].getAsFile();
+        importFileFromDrop(file)
+      }
+    }
+  }
+}
 
-
-        //             }
-        //             //colocar a transação no bloco
-        //         }
-        //     }
-        //     //colocar os blocos no BlockChain
-        // }
+function dragOverHandler(ev) {
+  // Impedir o comportamento padrão (impedir que o arquivo seja aberto)
+  ev.preventDefault();
+}
     </script>
     <script src="src/main.bundle.js"></script>
 

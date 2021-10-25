@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <title>Testing Import</title>
+</head>
+<style>
+    body {
+        background-color: #121212;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+    }
+</style>
+<body>
+    <script>
+        let coin = '';
+        fetch('coin.json').then(res => res.json()).then(res => importCoin(res));
+        
+
+        // function importCoin(res) {
+        //     //criar o blockChain//
+        //     let importedCoin = '';
+        //     //Criar os Blocos
+        //     let blocks = '';
+        //     for(let i = 0; i < res.chain.length; i++) {
+        //         if(i == 0 ) {
+        //             // Criar um bloco genesis com valor predefinido
+        //         }
+        //         else {
+        //             //criar um bloco com valores predefinidos   
+        //                 // console.log(res.chain[i])
+
+        //             //criar as transações do bloco
+        //             for(let b = 0; b < res.chain[i].transactions.length; b++) {
+        //                 //criar transação
+
+
+        //             }
+        //             //colocar a transação no bloco
+        //         }
+        //     }
+        //     //colocar os blocos no BlockChain
+        // }
+    </script>
+    <script src="src/main.bundle.js"></script>
+
+</body>
+</html>

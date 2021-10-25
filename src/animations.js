@@ -101,6 +101,18 @@ function downloadKeys(filename) {
     document.body.removeChild(element);
 }
 let coin;
+function exportCoin() {
+  var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + JSON.stringify(coin));
+    element.setAttribute('download', coin.name + '.json');
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
 function animateCreateCoin() {
     coin = createCoin();
     updateCoin(coin);

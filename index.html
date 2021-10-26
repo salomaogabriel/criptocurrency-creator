@@ -15,15 +15,26 @@
 
 </head>
 <body>
+    <div id="success" class="popup hide">An success happened!</div>
+    <div id="error" class="popup hide">An Error Happened!</div>
     <canvas class="background"></canvas>
+    <div id="newKeysPopUp" class="hide">
+        <div id="newKeys">
+            <h2>Add Your new Keys</h2>
+            <input type="text" placeholder="Private Key..." id="newPrivKey">
+            <input type="text" placeholder="Public Key..." id="newPubKey">
+            <button onclick="addNewKeys()">Add Keys</button>
+        </div>
+    </div>
     <section id="menu" class="" >
-        <h1>Create your own Criptocurrerncy</h1>
+        <h1>Create your own Cryptocurrerncy</h1>
         <article>
             <button onclick="goToCreateCoin()">Create New Coin</button>
-            <button>Import from File</button>
+            <button onclick="document.getElementById('fileUpload').click()">Import from File</button>
+            <input type="file" class="hide" id="fileUpload"  onchange="importFile(this.files)">
         </article>
         <h2>Or</h2>
-        <div id="dropZone">
+        <div id="dropZone"  ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
             <p>Drop a file with the blockchain</p>
         </div>
         <article class="theme">
@@ -77,8 +88,8 @@
             </article>
             <h3>Or</h3>
             <h2>Use existing key</h2>
-            <input type="text" placeholder="Private Key">
-            <input type="text" placeholder="Public Key">
+            <input type="text" placeholder="Private Key" id="existingPvKey">
+            <input type="text" placeholder="Public Key" id="existingPuKey">
             <button type="button" onclick="animateCreateCoin()">Create Coin</button>
 
         </form>
@@ -205,9 +216,9 @@
                 <h2>Public Key:<span id="settingsPuKey">bautaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaic</span></h2>
                 <h2>Private Key:<span id="settingsPvKey">bomtaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaic</span></h2>
                 <div class="buttons">
-                    <button>Generate new Keys</button>
+                    <button onclick="generateNewKeys()">Generate new Keys</button>
                     <h3>Or</h3>
-                    <button>Add existing keys</button>
+                    <button onclick="openAddNewKeys()">Add existing keys</button>
                 </div>
             </article>
             <article>
@@ -229,5 +240,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
     <script src="src/main.bundle.js"></script>
     <script src="src/animations.js"></script>
+    <script src="src/import.js"></script>
+
 </body>
 </html>

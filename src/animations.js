@@ -1,5 +1,6 @@
 // Charts
-
+let success = document.getElementById("success");
+let error = document.getElementById("error");
 var ctx = document.getElementById('balance').getContext('2d');
 var chart = new Chart(ctx, {
     type:"line",
@@ -76,7 +77,11 @@ function animateGenerateKeys(button) {
     }, 2000);
     
 }
+function generateNewKeys() {
+  [privateKey,publicKey] = generateKeys();
+  updateCoin(coin);
 
+}
 function goToCreateCoin() {
     document.getElementsByClassName("background")[0].classList.add("scaleUp");
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
@@ -114,6 +119,13 @@ function exportCoin() {
     document.body.removeChild(element);
 }
 function animateCreateCoin() {
+    let privateKeyInput = document.getElementById("existingPvKey").value;
+    let publicKeyInput = document.getElementById("existingPuKey").value;
+    if(privateKeyInput !== "" && publicKeyInput !== "") {
+      publicKey = publicKeyInput;
+      privateKey = privateKeyInput;
+    }
+    syncKeysWithMain(publicKey,privateKey);
     coin = createCoin();
     updateCoin(coin);
     document.getElementById("create").classList.add("hide");
@@ -248,4 +260,27 @@ function startMiner() {
   let hash = mine();
   document.getElementById("console").innerHTML += "<p style='color:#"+hash.substring(0,6) +"'>Block Mined! New Hash: "+ hash+"</p>";
   updateCoin(coin)
+}
+
+function openCoinDashboard(newCoin) {
+  coin = newCoin;
+  updateCoin(coin);
+  document.getElementById("menu").classList.add("hide");
+  document.getElementById("main").classList.remove("hide");
+}
+function openAddNewKeys() {
+  document.getElementById("newKeysPopUp").classList.remove("hide");
+
+}
+
+function addNewKeys() {
+  let privateKeyInput = document.getElementById("newPrivKey").value;
+  let publicKeyInput = document.getElementById("newPubKey").value;
+  privateKey = privateKeyInput;
+  publicKey = publicKeyInput;
+  syncKeysWithMain(publicKey,privateKey);
+  updateCoin(coin)
+  document.getElementById("newKeysPopUp").classList.add("hide");
+
+  
 }
